@@ -3,29 +3,21 @@
     <div class="container">
       <Moveable
         ref="moveable"
+        :disabled="active"
         class="moveable"
         v-bind="moveable"
+        @activated="onActivated"
+        @deactivated="onActivated"
         @drag="handleDrag"
         @resize="handleResize"
         @scale="handleScale"
         @rotate="handleRotate"
         @warp="handleWarp"
       >
-        <span> <img class="moveable" src="@/assets/1.png"></span>
+        <div class="moveable">
+          <img class="moveable" src="@/assets/1.png" />
+        </div>
       </Moveable>
-      <!-- <Moveable
-        ref="moveable"
-        class="moveable"
-        v-bind="moveable"
-        @drag="handleDrag"
-        @resize="handleResize"
-        @scale="handleScale"
-        @rotate="handleRotate"
-      >
-        <span>
-        <img src="@/assets/1.png" />
-        </span>
-      </Moveable> -->
     </div>
   </div>
 </template>
@@ -46,25 +38,25 @@ export default {
       h: 200,
       x: 0,
       y: 0,
+      active: true,
       moveable: {
         draggable: true,
-        throttleDrag: 0,
-        resizable: false,
+        throttleDrag: 1,
         throttleResize: 1,
         keepRatio: true,
         scalable: true,
-        throttleScale: 0,
+        throttleScale: 0.01,
         rotatable: true,
-        throttleRotate: 0,
-        pinchable: false, // ["draggable", "resizable", "scalable", "rotatable"]
-        origin: false,
+        throttleRotate: 0.2,
+        pinchable: true,
       },
     };
   },
-  mounted() {
-    console.log("getRect: ", this.$refs.moveable.getRect());
-  },
+  mounted() {},
   methods: {
+    onActivated() {
+      this.active = !this.active;
+    },
     change(newRect) {
       this.w = newRect.w;
       this.h = newRect.h;
@@ -72,30 +64,20 @@ export default {
       this.y = newRect.y;
     },
     handleDrag({ target, transform }) {
-      console.log("onDrag left, top", transform);
       target.style.transform = transform;
     },
     handleResize({ target, width, height, delta }) {
-      console.log("onResize", width, height);
       delta[0] && (target.style.width = `${width}px`);
       delta[1] && (target.style.height = `${height}px`);
     },
-    handleScale({ target, transform, scale }) {
-      // eslint-disable-next-line no-debugger
-      debugger;
-      console.log("onScale scale", scale);
+    handleScale({ target, transform }) {
       target.style.transform = transform;
     },
-    handleRotate({ target, dist, transform }) {
-      console.log("onRotate", dist);
+    handleRotate({ target, transform }) {
       target.style.transform = transform;
     },
     handleWarp({ target, transform }) {
-      console.log("onWarp", transform);
       target.style.transform = transform;
-    },
-    handlePinch({ target }) {
-      console.log("onPinch", target);
     },
   },
 };
