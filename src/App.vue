@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld />
+    <MovableImage />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld3.vue";
+import MovableImage from "./components/Movable.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    MovableImage,
   },
 };
 </script>

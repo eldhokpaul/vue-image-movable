@@ -2,7 +2,10 @@
   <div>
     <div class="container">
       <div class="cell">
-        <img src="@/assets/2.png" alt="" />
+        <img 
+          src="@/assets/2.png" 
+          alt=""
+        >
       </div>
       <div class="cell">
         <vue-drr
