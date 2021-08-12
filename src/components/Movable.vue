@@ -1,40 +1,20 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="cell">
-        <img 
-          src="@/assets/2.png" 
-          alt=""
-        >
-      </div>
-      <div class="cell">
-        <vue-drr
-          :x="x"
-          :y="y"
-          :angle="angle"
-          :w="width"
-          :h="height"
-          @dragging="handleDragging"
-          @resizing="handleResizing"
-          @rotating="handleRotating"
-        >
-          <img 
-            :style="style" 
-            src="@/assets/1.png"
-          >
-          <!-- <img
-            :style="{
-              top: x + 'px',
-              left: y + 'px',
-              width: width + 'px',
-              height: height + 'px',
-            }"
-            src="@/assets/1.png"
-          /> -->
-        </vue-drr>
-      </div>
-    </div>
-  </div>
+  <vue-drr
+    :x="x"
+    :y="y"
+    :angle="angle"
+    :w="width"
+    :h="height"
+    :parent="true"
+    @dragging="handleDragging"
+    @resizing="handleResizing"
+    @rotating="handleRotating"
+  >
+    <img
+      :style="style"
+      src="@/assets/1.png"
+    >
+  </vue-drr>
 </template>
 
 <script>
@@ -83,13 +63,3 @@ export default {
   },
 };
 </script>
-<style>
-.container {
-  widows: 50%;
-  position: relative;
-}
-.cell {
-  width: 50%;
-  float: leftF;
-}
-</style>
