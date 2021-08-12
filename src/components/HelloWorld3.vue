@@ -2,10 +2,7 @@
   <div>
     <div class="container">
       <div class="cell">
-        <img 
-          src="@/assets/2.png" 
-          alt=""
-        >
+        <img src="@/assets/2.png" alt="" />
       </div>
       <div class="cell">
         <vue-drr
@@ -18,7 +15,11 @@
           @resizing="handleResizing"
           @rotating="handleRotating"
         >
-          <img
+          <img 
+            :style="style" 
+            src="@/assets/1.png"
+          >
+          <!-- <img
             :style="{
               top: x + 'px',
               left: y + 'px',
@@ -26,7 +27,7 @@
               height: height + 'px',
             }"
             src="@/assets/1.png"
-          >
+          /> -->
         </vue-drr>
       </div>
     </div>
@@ -49,14 +50,25 @@ export default {
       angle: 0,
     };
   },
+  computed: {
+    style() {
+      return {
+        top: this.x + "px",
+        left: this.y + "px",
+        width: this.width + "px",
+        height: this.height + "px",
+        transform: "rotate(" + this.angle + "deg)",
+      };
+    },
+  },
   methods: {
     handleResizing: function (x, y, width, height) {
       this.x = x;
       this.y = y;
       this.width = width;
-      // this.height = height;
-      this.height = width;
-      console.log(height);
+      this.height = height;
+      // this.height = width;
+      // console.log(height);
     },
     handleDragging: function (x, y) {
       this.x = x;
